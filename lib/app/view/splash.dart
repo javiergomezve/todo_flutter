@@ -6,35 +6,39 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Text('Splash Page'),
-            const Text('This is a subtitle'),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('This is a subtitle'),
-                Text('This is a subtitle'),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Image.asset(
-                'assets/images/domestika-logo.png',
-                width: 100,
-                height: 100,
+      body: Column(
+        children: [
+          Row(
+            children: [
+              Image.asset(
+                "assets/images/shape.png",
+                width: 141,
+                height: 129,
               ),
+            ],
+          ),
+          const SizedBox(height: 80),
+          Image.asset(
+            "assets/images/onboarding-image.png",
+            width: 180,
+            height: 168,
+          ),
+          const SizedBox(height: 99),
+          Text(
+            'Lista de Tareas',
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 21, horizontal: 32),
+            child: Text(
+              'La mejor forma para que no se te olvide nada es anotarlo. Guardar tus tareas y ve completando poco a poco para aumentar tu productividad',
+              textAlign: TextAlign.center,
             ),
-            Container(
-              width: 200,
-              height: 100,
-              decoration: BoxDecoration(color: Colors.amber),
-            )
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
