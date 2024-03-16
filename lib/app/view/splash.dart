@@ -1,0 +1,33 @@
+import 'package:flutter/material.dart';
+
+class SplashPage extends StatelessWidget {
+  const SplashPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text('Splash Page'),
+            const Text('This is a subtitle'),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('This is a subtitle'),
+                Text('This is a subtitle'),
+              ],
+            ),
+            Container(
+              width: 200,
+              height: 100,
+              decoration: BoxDecoration(color: Colors.amber),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

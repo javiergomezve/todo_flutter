@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/app/view/home.dart';
+import 'package:todo_app/app/view/splash.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'ToDo App'),
+      home: const SplashPage(),
     );
   }
 }
