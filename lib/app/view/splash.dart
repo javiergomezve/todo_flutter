@@ -23,7 +23,7 @@ class SplashPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: Image.asset(
-                'assets/domestika-logo.png',
+                'assets/images/domestika-logo.png',
                 width: 100,
                 height: 100,
               ),
