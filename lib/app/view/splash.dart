@@ -20,6 +20,14 @@ class SplashPage extends StatelessWidget {
                 Text('This is a subtitle'),
               ],
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Image.asset(
+                'assets/domestika-logo.png',
+                width: 100,
+                height: 100,
+              ),
+            ),
             Container(
               width: 200,
               height: 100,
