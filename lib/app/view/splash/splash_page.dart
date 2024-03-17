@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/app/view/task_list/task_list_page.dart';
+import 'package:todo_app/app/widgets/h1.dart';
+import 'package:todo_app/app/widgets/shape.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -11,11 +13,7 @@ class SplashPage extends StatelessWidget {
         children: [
           Row(
             children: [
-              Image.asset(
-                "assets/images/shape.png",
-                width: 141,
-                height: 129,
-              ),
+              const Shape(),
             ],
           ),
           const SizedBox(height: 80),
@@ -25,17 +23,7 @@ class SplashPage extends StatelessWidget {
             height: 168,
           ),
           const SizedBox(height: 99),
-          Text(
-            'Lista de Tareas',
-            style: Theme
-                .of(context)
-                .textTheme
-                .bodyMedium!
-                .copyWith(
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
+          const H1('Lista de Tareas'),
           GestureDetector(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
