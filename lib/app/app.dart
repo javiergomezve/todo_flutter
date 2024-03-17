@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/app/view/home.dart';
+
 import 'package:todo_app/app/view/splash.dart';
-import 'package:todo_app/app/view/task_list.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -25,7 +24,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const TaskListPage(),
+      home: const SplashPage(),
     );
   }
 }
