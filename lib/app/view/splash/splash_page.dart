@@ -11,9 +11,9 @@ class SplashPage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          Row(
+          const Row(
             children: [
-              const Shape(),
+               Shape(),
             ],
           ),
           const SizedBox(height: 80),
