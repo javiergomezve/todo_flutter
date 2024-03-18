@@ -85,7 +85,7 @@ class _TaskItem extends StatelessWidget {
           child: Row(
             children: [
               Icon(
-                task.done ? Icons.check_box_outline_blank : Icons.check_box,
+                task.done ? Icons.check_box : Icons.check_box_outline_blank,
                 color: Theme.of(context).colorScheme.primary,
               ),
               const SizedBox(
