@@ -58,8 +58,13 @@ class _TaskListPageState extends State<TaskListPage> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      builder: (_) => _NewTaskModal(),
+      builder: (_) => _NewTaskModal(handleAddTask),
     );
+  }
+
+  void handleAddTask(Task task) {
+    taskList.add(task);
+    setState(() {});
   }
 }
 
@@ -95,14 +100,13 @@ class _TaskItem extends StatelessWidget {
   }
 }
 
-class _NewTaskModal extends StatefulWidget {
-  const _NewTaskModal({super.key});
+class _NewTaskModal extends StatelessWidget {
+  _NewTaskModal(this.handleAddTask, {Key? key}) : super(key: key);
 
-  @override
-  State<_NewTaskModal> createState() => _NewTaskModalState();
-}
+  final _controller = TextEditingController();
 
-class _NewTaskModalState extends State<_NewTaskModal> {
+  final void Function(Task task) handleAddTask;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -117,6 +121,7 @@ class _NewTaskModalState extends State<_NewTaskModal> {
           const H1('New tasks'),
           const SizedBox(height: 25),
           TextField(
+            controller: _controller,
             decoration: InputDecoration(
               hintText: 'Task description',
               filled: true,
@@ -127,7 +132,15 @@ class _NewTaskModalState extends State<_NewTaskModal> {
             ),
           ),
           const SizedBox(height: 25),
-          ElevatedButton(onPressed: () {}, child: Text('Save')),
+          ElevatedButton(
+              onPressed: () {
+                if (_controller.text.isNotEmpty) {
+                  final task = Task(_controller.text);
+                  handleAddTask(task);
+                  Navigator.of(context).pop();
+                }
+              },
+              child: const Text('Save')),
           const SizedBox(height: 25),
         ],
       ),
