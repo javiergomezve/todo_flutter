@@ -48,12 +48,17 @@ class _TaskListPageState extends State<TaskListPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          count++;
-          setState(() {});
-        },
+        onPressed: () => _showNewTaskModal(context),
         child: const Icon(Icons.add),
       ),
+    );
+  }
+
+  void _showNewTaskModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (_) => _NewTaskModal(),
     );
   }
 }
@@ -85,6 +90,46 @@ class _TaskItem extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _NewTaskModal extends StatefulWidget {
+  const _NewTaskModal({super.key});
+
+  @override
+  State<_NewTaskModal> createState() => _NewTaskModalState();
+}
+
+class _NewTaskModalState extends State<_NewTaskModal> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+      decoration: const BoxDecoration(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          color: Colors.white),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const H1('New tasks'),
+          const SizedBox(height: 25),
+          TextField(
+            decoration: InputDecoration(
+              hintText: 'Task description',
+              filled: true,
+              fillColor: Colors.white,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
+          ),
+          const SizedBox(height: 25),
+          ElevatedButton(onPressed: () {}, child: Text('Save')),
+          const SizedBox(height: 25),
+        ],
       ),
     );
   }
