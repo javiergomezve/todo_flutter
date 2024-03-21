@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app/app/model/task.dart';
+import 'package:todo_app/app/repository/task_repository.dart';
 import 'package:todo_app/app/widgets/h1.dart';
 
 class TaskListPage extends StatefulWidget {
@@ -12,11 +16,7 @@ class TaskListPage extends StatefulWidget {
 class _TaskListPageState extends State<TaskListPage> {
   int count = 0;
 
-  final taskList = <Task>[
-    Task('flask'),
-    Task('react'),
-    Task('typescipt'),
-  ];
+  final taskRepository = TaskRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -26,22 +26,41 @@ class _TaskListPageState extends State<TaskListPage> {
           children: [
             const H1('Tasks'),
             Expanded(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                child: ListView.separated(
-                  itemCount: taskList.length,
-                  separatorBuilder: (_, __) => const SizedBox(
-                    height: 10,
-                  ),
-                  itemBuilder: (_, index) => _TaskItem(
-                    taskList[index],
-                    onTap: () {
-                      taskList[index].done = !taskList[index].done;
-                      setState(() {});
-                    },
-                  ),
-                ),
+              child: FutureBuilder<List<Task>>(
+                future: taskRepository.getTasks(),
+                builder:
+                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+
+                  if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return const Center(
+                      child: Text('There is no tasks'),
+                    );
+                  }
+
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 20),
+                    child: ListView.separated(
+                      itemCount: snapshot.data!.length,
+                      separatorBuilder: (_, __) => const SizedBox(
+                        height: 10,
+                      ),
+                      itemBuilder: (_, index) => _TaskItem(
+                        snapshot.data![index],
+                        onTap: () {
+                          snapshot.data![index].done = !snapshot.data![index].done;
+                          taskRepository.saveTask(snapshot.data!);
+                          setState(() {});
+                        },
+                      ),
+                    ),
+                  );
+                },
               ),
             )
           ],
@@ -62,9 +81,8 @@ class _TaskListPageState extends State<TaskListPage> {
     );
   }
 
-  void handleAddTask(Task task) {
-    taskList.add(task);
-    setState(() {});
+  Future<void> handleAddTask(Task task) async {
+    taskRepository.addTask(task);
   }
 }
 
